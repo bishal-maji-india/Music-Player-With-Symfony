@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Player</title>
+    {# the CSS file lives at "public/css/styles.css" #}
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet"/>
+</head>
+
+<body class="bg_green">
+<?php
+  $name ={{name}};
+  $file_name ={{ audio }};
+  $singer = {{ singer }};
+  $genre = {{ genre }};
+  $cover = {{ thumb }};
+  $audio = "http://localhost/audio_files/$file_name";
+  ?>
+<div class="container">
+    <div class="box">
+        <h3>PlayinG x oF Y</h3>
+        <br>
+        <br>
+        <img class="player_cover" src="http://localhost/uploads/thumbnails/{{ thumb }}" alt="Play">
+        <h1>{{ name }}</h1>
+            <h4>{{ singer }}</h4>
+            <h4>{{ genre }}</h4>
+            <br>
+            <br>
+            <audio controls>
+                <source src="http://localhost/uploads/audio/{{ audio }}" type="audio/mpeg">
+            </audio>
+    </div>
+</div>
+
+</body>
+
+</html>

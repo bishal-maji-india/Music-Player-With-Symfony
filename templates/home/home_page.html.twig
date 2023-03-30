@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    {# the CSS file lives at "public/css/styles.css" #}
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet"/>
+</head>
+
+<body class="bg_primary">
+<div class="container background">
+    <header class="flex header background" >
+        <h1 class="heading">Music Player</h1>
+        <div class="nav-bar">
+            {{ form_start(home_buttons_form,{ 'attr' : { 'class': 'flex' } }) }}
+            {{ form_end(home_buttons_form,{ 'attr' : { 'class': 'flex' } }) }}
+        </div>
+    </header>
+
+    <div class="margin-top-low">
+
+<table class="table">
+    <thead>
+    <tr class="flex">
+        <th>Sr No</th>
+        <th>Song Name</th>
+        <th>Singer Name</th>
+        <th>Add to Favourite</th>
+        <th>Play Music</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for item  in music_list %}
+        <tr class="flex">
+                <td><img class="icon" src="http://localhost/uploads/thumbnails/{{ item.thumb }}" alt="Play"></td>
+                <td><h2>{{ item.name }}</h2></td>
+                <td><h2>{{ item.singer }}</h2></td>
+            <td><a href="favourite{{item.id}}"> <img class="icon"  src="http://localhost/uploads/icons/favourite_icon.png" alt="Play"></a></td>
+            <td><a href="{{ path('open_player_route', {id: item.id, name: item.name, singer:item.singer, genre:item.genre, thumb:item.thumb, audio:item.audio}) }}"><img class="icon"  src="http://localhost/uploads/icons/play_icon.png" alt="Play"></a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+    </div>
+
+</div>
+</body>
+
+</html>

@@ -56,7 +56,7 @@ class AuthController extends AbstractController
             }
 
         }
-        return $this->render('home/login.html.twig', ['login_form' => $form_login->createView()]);
+        return $this->render('auth/login.html.twig', ['login_form' => $form_login->createView()]);
     }
 
 
@@ -92,8 +92,7 @@ class AuthController extends AbstractController
                 $article->setContact($data['contact']);
                 $article->setInterest($data['interest']);
 
-//                form other field validation
-                $errors = $validator->validate($article);
+                $errors = $validator->validate($article);//form other field validation
                 if (count($errors) > 0) {
                     $i = 0;
                     foreach ($errors as $error) {
@@ -110,7 +109,7 @@ class AuthController extends AbstractController
                 }
             }
         }
-        return $this->render('home/register.html.twig', ['user_form' => $form->createView(), 'mail_err' => $mail_err, 'errors' => $error_arr]);
+        return $this->render('auth/register.html.twig', ['user_form' => $form->createView(), 'mail_err' => $mail_err, 'errors' => $error_arr]);
     }
 
     /**
@@ -123,11 +122,5 @@ class AuthController extends AbstractController
         return $this->redirectToRoute('index');
 
     }
-
-    private function verifyMail($email)
-    {
-
-    }
-
 
 }

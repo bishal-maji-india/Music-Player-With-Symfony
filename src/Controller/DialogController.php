@@ -35,7 +35,7 @@ class DialogController extends AbstractController
      */
     public function showSuccessDialog($message, $nav_route)
     {
-        return $this->render('home/success_page.html.twig', ['message' => $message, 'nav_route' => $nav_route]);
+        return $this->render('dialog/success_page.html.twig', ['message' => $message, 'nav_route' => $nav_route]);
     }
 
     /**
@@ -46,7 +46,7 @@ class DialogController extends AbstractController
      */
     public function showErrorDialog($message, $nav_route)
     {
-        return $this->render('home/error_page.html.twig', ['message' => $message, 'nav_route' => $nav_route]);
+        return $this->render('dialog/error_page.html.twig', ['message' => $message, 'nav_route' => $nav_route]);
     }
 
 }

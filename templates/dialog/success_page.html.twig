@@ -1,9 +1,10 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <!-- jQuery CDN for dialog boxes -->
-    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"> </script>
+{#    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">#}
+{#    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>#}
+{#    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"> </script>#}
     <!-- CSS -->
     <style>
         .ui-widget-header {
@@ -15,6 +16,7 @@
             text-align: center;
         }
     </style>
+    <title>Success</title>
 </head>
 <body>
 <div id="dialog">
@@ -30,14 +32,10 @@
 
 <script>
     $(function() {
-        $( "#dialog" ).dialog({
+        $( "#dialog" ).dialog("open",{
             autoOpen: false
         });
-        $( "#dialog" ).dialog( "open" );
 
-        // $( "#opener" ).click(function() {
-        //     $( "#dialog" ).dialog( "close" );
-        // });
 
     });
 

@@ -1,11 +1,19 @@
 <?php
 
-namespace App\Entity;use Symfony\Component\Validator\Mapping\ClassMetadata;
+namespace App\Entity;
+
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Email;
+
+
 
 class UpdateValidation
 {
     private $email;
+    private $contact;
+    private $interest;
 
     /**
      * @return mixed
@@ -54,11 +62,12 @@ class UpdateValidation
     {
         $this->interest = $interest;
     }
-    private $contact;
-    private $interest;
+
+
 
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
+        //empty field check validation
         $metadata->addPropertyConstraint('email', new Assert\NotBlank([
             'message' => 'Email must not be null'
         ]));
@@ -68,14 +77,14 @@ class UpdateValidation
         $metadata->addPropertyConstraint('contact', new Assert\NotBlank([
             'message' => 'Contact must not be null'
         ]));
-        //        other extra validation
+        //other extra validation
         $metadata->addPropertyConstraint('email', new Assert\Email([
             'message' => 'The email "{{ value }}" is not a valid email.',
         ]));
         $metadata->addPropertyConstraint('contact', new Assert\Length(array(
-            'min' => 1,
+            'min' => 10,
             'max' => 10,
-            'minMessage' => 'phone number must be  greater than 0 digit',
+            'minMessage' => 'phone number must be  equal to 10 digit',
             'maxMessage' => 'phone number must be  less than 10 digit'
 
         )));

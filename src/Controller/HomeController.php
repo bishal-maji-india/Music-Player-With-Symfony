@@ -11,7 +11,6 @@ use App\Model\HomeModel;
 
 use Doctrine\DBAL\Types\IntegerType;
 use Doctrine\ORM\EntityManagerInterface;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Console\Input\Input;
 use Symfony\Component\Form\ChoiceList\Factory\ChoiceListFactoryInterface;
@@ -67,7 +66,7 @@ class HomeController extends AbstractController
 
                 if (!$user) {
                     throw $this->createNotFoundException(
-                        'No product found for id ' . $id
+                        'No User found for id ' . $id
                     );
                 }
                 $arr = $form->getData();
@@ -96,9 +95,6 @@ class HomeController extends AbstractController
      */
     public function add_music(EntityManagerInterface $entityManager, Request $request)
     {
-        ini_set('display_errors', 1);
-        ini_set('display_startup_errors', 1);
-        error_reporting(E_ALL);
         $add_music_form = $this->createFormBuilder([])
             ->add('audio', FileType::class, ['label' => 'Audio'])
             ->add('name', TextType::class, ['label' => 'Name'])
@@ -112,7 +108,6 @@ class HomeController extends AbstractController
         if ($add_music_form->isSubmitted() and $add_music_form->isValid()) {
             $data = $add_music_form->getData();
             $model = new HomeModel();
-
             $article = new MusicTable();
             $article->setName($data['name']);
             $article->setAudio($data['audio']);
@@ -122,12 +117,10 @@ class HomeController extends AbstractController
             $session = new Session();
             $param_upload_by = $session->get('uid');
             $article->setUploadBy($param_upload_by);
-
             $audio_file = $add_music_form->get('audio')->getData();
             $thumb_file = $add_music_form->get('thumb')->getData();
             $audio_fileName = md5(uniqid()) . '.' . $audio_file->guessExtension();
             $thumb_fileName = md5(uniqid()) . '.' . $thumb_file->guessExtension();
-
             $audio_file->move($this->getParameter('audio_directory'), $audio_fileName);
             $thumb_file->move($this->getParameter('thumb_directory'), $thumb_fileName);
             $article->setAudio($audio_fileName);
@@ -181,7 +174,6 @@ class HomeController extends AbstractController
         }
 
         $music_list_repo = $entityManager->getRepository(MusicTable::class);
-
         $music_list = $music_list_repo->findAll();
         $uid = $session->get('uid');
         return $this->render('home/home_page.html.twig', ['attr' => ['class' => 'flex'], 'music_list' => $music_list, 'home_buttons_form' => $form->createView(), 'uid' => $uid]);
@@ -223,7 +215,6 @@ class HomeController extends AbstractController
         return $this->render('home/favourite_page.html.twig', ['favourite_arr' => $favourite_arr]);
 
     }
-
 
     /**
      *

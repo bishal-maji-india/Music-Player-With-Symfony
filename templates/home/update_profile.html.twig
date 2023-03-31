@@ -14,7 +14,11 @@
 <div class="container flex align-center height-full">
     <div class="box background">
         <div class="margin-bottom text-align-start"><h1>Update Profile</h1></div>
-
+        <ul>
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
         {{ form_start(update_profile_form) }}
 {{ form_end(update_profile_form) }}
     </div>

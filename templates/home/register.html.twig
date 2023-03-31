@@ -11,6 +11,12 @@
 <div class="container flex align-center height-full">
     <div class="box background">
         <div class="margin-bottom text-align-start"><h1>Registration Page</h1></div>
+        <h3>The User has the following errors</h3>
+        <ul>
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
         {{ form_start(user_form) }}
         {{ form_end(user_form) }}
     </div>

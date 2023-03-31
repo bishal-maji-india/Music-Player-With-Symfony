@@ -24,25 +24,29 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
-class DialogController extends  AbstractController
+
+class DialogController extends AbstractController
 {
-   /**
-    * @Route("/succcess/{message}/{nav_route}", name="success_route")
-    * @param $message
-    * @param $nav_route
-    *
-    */
-   public function showSuccessDialog($message, $nav_route){
-       return $this->render('home/success_page.html.twig', ['message'=>$message,'nav_route'=>$nav_route]);
-   }
+    /**
+     * @Route("/succcess/{message}/{nav_route}", name="success_route")
+     * @param $message
+     * @param $nav_route
+     *
+     */
+    public function showSuccessDialog($message, $nav_route)
+    {
+        return $this->render('home/success_page.html.twig', ['message' => $message, 'nav_route' => $nav_route]);
+    }
+
     /**
      * @Route("/error/{message}/{nav_route}", name="error_route")
      * @param $message
      * @param $nav_route
      *
      */
-    public function showErrorDialog($message, $nav_route){
-        return $this->render('home/error_page.html.twig', ['message'=>$message,'nav_route'=>$nav_route]);
+    public function showErrorDialog($message, $nav_route)
+    {
+        return $this->render('home/error_page.html.twig', ['message' => $message, 'nav_route' => $nav_route]);
     }
 
 }

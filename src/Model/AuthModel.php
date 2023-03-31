@@ -3,7 +3,9 @@
 namespace App\Model;
 use App\Entity\UserTable;
 use App\Model\MainModel;
-use PDO;
+
+use GuzzleHttp;
+use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -54,5 +56,15 @@ class AuthModel extends  AbstractController
         else{
             return false;
         }
+    }
+
+    /**
+     * @throws GuzzleException
+     */
+    public function verifyMail($email)
+    {
+        $client = new GuzzleHttp\Client();
+        $res = $client->request('GET', "https://emailvalidation.abstractapi.com/v1/?api_key=b9fbc7b61bd24a69819ce7a628bdf666&email=$email");
+        return json_decode($res->getBody(), true);
     }
 }

@@ -217,19 +217,44 @@ class HomeController extends AbstractController
             ->getForm();
 
         $form->handleRequest($request);
+        $form->handleRequest($request);
 
+      
         // Handle the form submission and click event.
         if ($form->isSubmitted() and $form->isValid()) {
-            if ($form->get('add_music')->isClicked()) {
+
+         
+            /**
+             * @var ClickableInterface $add_music_btn
+             */
+             $add_music_btn = $form->get("add_music");
+
+            /**
+             * @var ClickableInterface $logout_btn
+             */
+             $logout_btn = $form->get("logout");
+
+             /**
+              * @var ClickableInterface $profile_update_btn
+              */
+             $profile_update_btn = $form->get("profile_update");
+
+             /**
+              * @var ClickableInterface $my_favourite_btn
+              */
+             $my_favourite_btn = $form->get("my_favourites");
+             
+
+            if ($add_music_btn->isClicked()) {
                 return $this->redirectToRoute('add_music_route');
             }
-            if ($form->get('logout')->isClicked()) {
+            if ($logout_btn->isClicked()) {
                 return $this->redirectToRoute('logout_route');
             }
-            if ($form->get('profile_update')->isClicked()) {
+            if ($profile_update_btn->isClicked()) {
                 return $this->redirectToRoute('profile_update_route');
             }
-            if ($form->get('my_favourites')->isClicked()) {
+            if ($my_favourite_btn->isClicked()) {
                 return $this->redirectToRoute('my_favourites_route');
             }
         }

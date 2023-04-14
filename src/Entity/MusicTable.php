@@ -10,121 +10,117 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class MusicTable
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+  /**
+   * @ORM\Id
+   * @ORM\GeneratedValue
+   * @ORM\Column(type="integer")
+   */
+  private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $audio;
+  /**
+   * @ORM\Column(type="string", length=255)
+   */
+  private $audio;
 
+  /**
+   * @ORM\Column(type="string", length=255)
+   */
+  private $name;
 
+  /**
+   * @ORM\Column(type="string", length=255)
+   */
+  private $singer;
 
-    
+  /**
+   * @ORM\Column(type="string", length=255)
+   */
+  private $genre;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
+  /**
+   * @ORM\Column(type="string", length=255)
+   */
+  private $thumb;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $singer;
+  /**
+   * @ORM\Column(type="integer")
+   */
+  private $upload_by;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $genre;
+  public function getId(): ?int
+  {
+    return $this->id;
+  }
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $thumb;
+  public function getAudio(): ?string
+  {
+    return $this->audio;
+  }
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $upload_by;
+  public function setAudio(string $audio): self
+  {
+    $this->audio = $audio;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    return $this;
+  }
 
-    public function getAudio(): ?string
-    {
-        return $this->audio;
-    }
+  public function getName(): ?string
+  {
+    return $this->name;
+  }
 
-    public function setAudio(string $audio): self
-    {
-        $this->audio = $audio;
+  public function setName(string $name): self
+  {
+    $this->name = $name;
 
-        return $this;
-    }
+    return $this;
+  }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
+  public function getSinger(): ?string
+  {
+    return $this->singer;
+  }
 
-    public function setName(string $name): self
-    {
-        $this->name = $name;
+  public function setSinger(string $singer): self
+  {
+    $this->singer = $singer;
 
-        return $this;
-    }
+    return $this;
+  }
 
-    public function getSinger(): ?string
-    {
-        return $this->singer;
-    }
+  public function getGenre(): ?string
+  {
+    return $this->genre;
+  }
 
-    public function setSinger(string $singer): self
-    {
-        $this->singer = $singer;
+  public function setGenre(string $genre): self
+  {
+    $this->genre = $genre;
 
-        return $this;
-    }
+    return $this;
+  }
 
-    public function getGenre(): ?string
-    {
-        return $this->genre;
-    }
+  public function getThumb(): ?string
+  {
+    return $this->thumb;
+  }
 
-    public function setGenre(string $genre): self
-    {
-        $this->genre = $genre;
+  public function setThumb(string $thumb): self
+  {
+    $this->thumb = $thumb;
 
-        return $this;
-    }
+    return $this;
+  }
 
-    public function getThumb(): ?string
-    {
-        return $this->thumb;
-    }
+  public function getUploadBy(): ?int
+  {
+    return $this->upload_by;
+  }
 
-    public function setThumb(string $thumb): self
-    {
-        $this->thumb = $thumb;
+  public function setUploadBy(int $upload_by): self
+  {
+    $this->upload_by = $upload_by;
 
-        return $this;
-    }
-
-    public function getUploadBy(): ?int
-    {
-        return $this->upload_by;
-    }
-
-    public function setUploadBy(int $upload_by): self
-    {
-        $this->upload_by = $upload_by;
-
-        return $this;
-    }
+    return $this;
+  }
 }

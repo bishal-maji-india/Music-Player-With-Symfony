@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <title>Login</title>
-    {# the CSS file lives at "public/css/styles.css" #}
-    <link href="{{ asset('css/styles.css') }}" rel="stylesheet"/>
-</head>
+	<head>
+		<title>Login</title>
+		{# the CSS file lives at "public/css/styles.css" #}
+		<link href="{{ asset('css/styles.css') }}" rel="stylesheet"/>
+	</head>
 
-<body class="bg_primary">
+	<body class="bg_primary">
 
-<div class="container flex align-center height-full">
-    <div class="box background">
-        <div class="margin-bottom text-align-start"><h1>Login Page</h1></div>
-        {{ form_start(login_form) }}
-        {{ form_end(login_form) }}
-</div>
-</div>
-</body>
+		<div class="container flex align-center height-full">
+			<div class="box background">
+				<div class="margin-bottom text-align-start">
+					<h1>Login Page</h1>
+				</div>
+				{{ form_start(login_form) }}
+				{{ form_end(login_form) }}
+			</div>
+		</div>
+	</body>
 </html>

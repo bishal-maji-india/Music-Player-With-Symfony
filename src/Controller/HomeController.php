@@ -6,22 +6,14 @@ use App\Entity\FavouriteTable;
 use App\Entity\MusicTable;
 use App\Entity\UpdateValidation;
 use App\Entity\UserTable;
-use App\Model\AuthModel;
 use App\Model\HomeModel;
-
-use Doctrine\DBAL\Types\IntegerType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Console\Input\Input;
-use Symfony\Component\Form\ChoiceList\Factory\ChoiceListFactoryInterface;
+
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -66,7 +58,7 @@ class HomeController extends AbstractController
      * 
      * 
      */
-    public function update_profile(EntityManagerInterface $entityManager, Request $request, ValidatorInterface $validator)
+    public function updateProfile(EntityManagerInterface $entityManager, Request $request, ValidatorInterface $validator)
     {
         // Store the error message present after form validation.
         $error_arr = array();
@@ -142,7 +134,7 @@ class HomeController extends AbstractController
      * Instance of entity manager interface.
      *
      */
-    public function add_music(EntityManagerInterface $entityManager, Request $request)
+    public function addMusic(EntityManagerInterface $entityManager, Request $request)
     {
         $add_music_form = $this->createFormBuilder([])
             ->add('audio', FileType::class, ['label' => 'Audio'])
@@ -266,7 +258,7 @@ class HomeController extends AbstractController
      * Id of row having same music id.
      *
      */
-    public function add_to_favourite(EntityManagerInterface $entityManager, Request $request, $music_id)
+    public function addToFavourite(EntityManagerInterface $entityManager, Request $request, $music_id)
     {
         // Get uid from session variable.
         $userid = $this->session->get('uid');
@@ -294,7 +286,7 @@ class HomeController extends AbstractController
      * Instance of entity manager interface.
      * 
      */
-    public function my_favourites(EntityManagerInterface $entityManager)
+    public function myFavourites(EntityManagerInterface $entityManager)
     {
         //Instance of home model.
         $model = new HomeModel();
@@ -331,7 +323,7 @@ class HomeController extends AbstractController
      * Instance of response variable.
      * 
      */
-    public function open_player($id, $name, $singer, $genre, $thumb, $audio): Response
+    public function openPlayer($id, $name, $singer, $genre, $thumb, $audio): Response
     {
         return $this->render('home/player_view.html.twig', ['id' => $id, 'name' => $name, 'singer' => $singer, 'genre' => $genre, 'thumb' => $thumb, 'audio' => $audio,]);
     }

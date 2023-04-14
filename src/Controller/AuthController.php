@@ -46,7 +46,7 @@ class AuthController extends AbstractController
      * Instance of entity manager interface.
      *
      */
-    public function login_page(EntityManagerInterface $em, Request $request)
+    public function loginPage(EntityManagerInterface $em, Request $request)
     {
         //create form with email, and password fields.
         $form_login = $this->createFormBuilder([])
@@ -97,7 +97,7 @@ class AuthController extends AbstractController
      * 
      * @throws GuzzleException
      */
-    public function register_page(EntityManagerInterface $em, Request $request, ValidatorInterface $validator)
+    public function registerPage(EntityManagerInterface $em, Request $request, ValidatorInterface $validator)
     {
         /**
          * @param $mail_err
@@ -120,6 +120,7 @@ class AuthController extends AbstractController
             ->add('contact', NumberType::class, ['label' => 'Contact', 'required' => true])
             ->add('save', SubmitType::class, ['label' => 'Register'])
             ->getForm();
+            
         $form->handleRequest($request);
 
         // Handle form submission and form validation.

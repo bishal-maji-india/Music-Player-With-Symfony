@@ -28,13 +28,27 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AuthController extends AbstractController
 {
+    public $model=null;
+    public function __construct()
+    {
+
+     $this->model=new AuthModel();   
+    }
     /**
+     * Navigate user to the login page.
+     * 
      * @Route("/login_page", name="login_page_route")
+     * 
+     * @param Request $request
+     * Instance of request variable.
+     * 
+     * @param EntityManagerInterface $entityMangaer
+     * Instance of entity manager interface.
      *
      */
-    public function login_page(EntityManagerInterface $em, Request $request, ValidatorInterface $validator)
+    public function login_page(EntityManagerInterface $em, Request $request)
     {
-        $error_arr = array();
+        //create form with email, and password fields.
         $form_login = $this->createFormBuilder([])
             ->add('email', EmailType::class, ['label' => 'Email', 'required' => true])
             ->add('password', PasswordType::class, ['label' => 'Password', 'required' => true])
@@ -42,13 +56,20 @@ class AuthController extends AbstractController
             ->getForm();
         $form_login->handleRequest($request);
 
+        // Handle form submission request.
         if ($form_login->isSubmitted() and $form_login->isValid()) {
             $data = $form_login->getData();
             $param_email = $data['email'];
             $param_password = $data['password'];
-            $model = new AuthModel();
 
-            if ($model->isUserExist($param_email, $param_password, $em)) {
+            // Instance of AuthModel- store user data.
+            
+
+            /*
+             Navigate to homepage if user exist in
+              data-base with matching password.
+            */
+            if ($this->model->isUserExist($param_email, $param_password, $em)) {
                 return $this->redirectToRoute('home_page_route');
             } else {
                 return $this->redirectToRoute('error_route', ['message' => 'No User Found with give fields', 'nav_route' => 'login_page_route']);
@@ -61,13 +82,36 @@ class AuthController extends AbstractController
 
 
     /**
+     * Register the user and add user data in db.
+     * 
      * @Route("/register_page", name="register_page_route")
+     * 
+     * @param Request $request
+     * Instance of request variable.
+     * 
+     * @param EntityManagerInterface $entityMangaer
+     * Instance of entity manager interface.
+     *  
+     * @param ValidatorInterface $validator
+     * Instance of pre-defined symfony Validator class for user data validation.
+     * 
      * @throws GuzzleException
      */
     public function register_page(EntityManagerInterface $em, Request $request, ValidatorInterface $validator)
     {
+        /**
+         * @param $mail_err
+         * Contain error message in email field after validation.
+         * 
+         * @param error_arr
+         * Contain error message of all the other fields.
+         * 
+         */
         $mail_err = "";
         $error_arr = array();
+
+
+        // Create form to take user data for registration.
         $form = $this->createFormBuilder([])
             ->add('name', TextType::class, ['label' => 'Name', 'required' => true])
             ->add('email', EmailType::class, ['label' => 'Email', 'required' => true])
@@ -77,22 +121,37 @@ class AuthController extends AbstractController
             ->add('save', SubmitType::class, ['label' => 'Register'])
             ->getForm();
         $form->handleRequest($request);
+
+        // Handle form submission and form validation.
         if ($form->isSubmitted() and $form->isValid()) {
             $data = $form->getData();
+
+            // Instance of auth model.
             $model = new AuthModel();
-            $body = $model->verifyMail($data['email']);//email validation
+            
+            /**
+             * Verify the mail using api and return true or 
+             * false in case of valid or invalid mail.
+             * */
+            $body = $model->verifyMail($data['email']);
+
+            //
             if (!$body['is_valid_format']['value']) {
                 $mail_err = "Invalid Email Address";
             } else {
                 $model = new AuthModel();
-                $article = new UserTable();
-                $article->setName($data['name']);
-                $article->setEmail($data['email']);
-                $article->setPassword($data['password']);
-                $article->setContact($data['contact']);
-                $article->setInterest($data['interest']);
 
-                $errors = $validator->validate($article);//form other field validation
+                // Instance of user table.
+                $user_table = new UserTable();
+                $user_table->setName($data['name']);
+                $user_table->setEmail($data['email']);
+                $user_table->setPassword($data['password']);
+                $user_table->setContact($data['contact']);
+                $user_table->setInterest($data['interest']);
+                
+                // Validate other fields of the form data.
+                $errors = $validator->validate($user_table);
+
                 if (count($errors) > 0) {
                     $i = 0;
                     foreach ($errors as $error) {
@@ -101,7 +160,8 @@ class AuthController extends AbstractController
                     }
 
                 } else {
-                    if ($model->isRegisterDone($article, $em)) {
+                    // Return true if register is done or false.
+                    if ($model->isRegisterDone($user_table, $em)) {
                         return $this->redirectToRoute('home_page_route');
                     } else {
                         return $this->redirectToRoute('error_route', ['message' => 'Registration Unsuccessful', 'nav_route' => 'index']);
@@ -113,12 +173,18 @@ class AuthController extends AbstractController
     }
 
     /**
+     * Destroy the user session and move the user to the home page.
+     * 
      * @Route("/logout", name="logout_route")
+     * 
      */
     public function logout()
     {
+        // Instance of session variable.
         $session = new Session();
+        // Logout the user.
         $session->set('login', 0);
+        // Move the user to the auth page.
         return $this->redirectToRoute('index');
 
     }

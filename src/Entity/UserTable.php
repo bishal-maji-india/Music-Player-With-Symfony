@@ -51,7 +51,7 @@ class UserTable
 
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-//        blank field validation
+        //Empty field validation
         $metadata->addPropertyConstraint('name', new Assert\NotBlank([
             'message' => 'Name must not be null'
         ]));
@@ -67,7 +67,8 @@ class UserTable
         $metadata->addPropertyConstraint('contact', new Assert\NotBlank([
             'message' => 'Contact must not be null'
         ]));
-//        other extra validation
+        
+        // Other extra validation for email and contact.
         $metadata->addPropertyConstraint('email', new Assert\Email([
             'message' => 'The email "{{ value }}" is not a valid email.',
         ]));

@@ -17,7 +17,8 @@ class AuthModel extends  AbstractController
     public $dbname;
     public $username;
     public $password_sql;
-
+    
+    // Constructor to inililize the data used for this class.
     public function __construct()
     {
 
@@ -27,7 +28,19 @@ class AuthModel extends  AbstractController
         $this->password_sql =$_ENV['APP_PASSWORD'] ;
     }
 
-    //this function returns true if user exist in db.
+    /**
+     * Function returns true if user with the following data exist in db.
+     * 
+     * @param $mail
+     * Contains user email address.
+     * 
+     * @param $password
+     * Contains password of the user.
+     * 
+     * @param $em
+     * Contains the instance of entity manager variable.
+     * 
+     */
     public function isUserExist($mail,$password,$em)
     {
         $user_repo = $em->getRepository(UserTable::class);
@@ -43,13 +56,23 @@ class AuthModel extends  AbstractController
         }
         return false;
     }
-    public function isRegisterDone($article,$em)
+
+    /**
+     * Function to add new user in db and return true on success addition.
+     * 
+     * @param $data
+     * Contains instance of user form data.
+     * 
+     * @param $em
+     * Contains the instance of entity manager variable.
+     * 
+     */
+    public function isRegisterDone($data,$em)
     {
-        $em->persist($article);
+        $em->persist($data);
         if($em->flush()==null){
             $session = new Session();
-            $session->start();
-            $session->set('uid', $article->getId());
+            $session->set('uid', $data->getId());
             $session->set('login', 1);
             return true;
         }
@@ -59,6 +82,11 @@ class AuthModel extends  AbstractController
     }
 
     /**
+     * Checks for valid mail address and return true if valid.
+     * 
+     * @param $email
+     * Instance of user email.
+     * 
      * @throws GuzzleException
      */
     public function verifyMail($email)

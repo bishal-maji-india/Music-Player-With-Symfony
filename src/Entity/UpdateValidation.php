@@ -64,10 +64,16 @@ class UpdateValidation
     }
 
 
-
+    /**
+     * This function is called when doing form data validation.
+     * 
+     * @param ClassMetadata $metadata
+     * Contains information of the form data.
+     * 
+     */
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-        //empty field check validation
+        // Empty field check validation
         $metadata->addPropertyConstraint('email', new Assert\NotBlank([
             'message' => 'Email must not be null'
         ]));
@@ -77,7 +83,8 @@ class UpdateValidation
         $metadata->addPropertyConstraint('contact', new Assert\NotBlank([
             'message' => 'Contact must not be null'
         ]));
-        //other extra validation
+
+        // Other extra validation for email and contact.
         $metadata->addPropertyConstraint('email', new Assert\Email([
             'message' => 'The email "{{ value }}" is not a valid email.',
         ]));

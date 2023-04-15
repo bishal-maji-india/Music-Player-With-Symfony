@@ -122,7 +122,6 @@ class AuthController extends AbstractController
     $mail_err = "";
     $error_arr = array();
 
-
     // Create form to take user data for registration.
     $form = $this->createFormBuilder([])
       ->add('name', TextType::class, ['label' => 'Name', 'required' => true])

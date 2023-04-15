@@ -8,5 +8,8 @@
 /vendor/
 .env
 /public/uploads/
+/raw/
+/.idea/
+/uploads/
 
 ###< symfony/framework-bundle ###

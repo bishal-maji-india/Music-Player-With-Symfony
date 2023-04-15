@@ -11,5 +11,6 @@
 /raw/
 /.idea/
 /uploads/
+/.settings/
 
 ###< symfony/framework-bundle ###

@@ -1,0 +1,106 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+
+}
+.container {
+    width: 1250px;
+    margin: 0 auto;
+
+}
+.height-full{
+    height: 100vh;
+}
+.align-center{
+    align-items: center;
+}
+.bg_primary{
+    background-size: cover;
+    background: url('../raw/bg_primary.jpg') no-repeat;
+}
+.button {
+    min-width: 150px;
+    background-color: green;
+    color: white;
+    padding: 10px;
+    display: inline-block;
+
+}
+input {
+    padding: 10px;
+    min-width: 150px;
+}
+.box {
+    padding: 30px;
+    height: max-content;
+    width: max-content;
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+
+}
+a{
+    text-decoration: none;
+}
+.margin-top{
+    margin-top: 50px;
+}
+.margin-top-low{
+    margin-top: 20px;
+}
+.flex{
+    display: flex;
+    justify-content: space-between;
+}
+
+label{
+    min-width: 150px;
+    text-align: start;
+    margin: auto 0;
+    color: black;
+    font-size:25px;
+}
+.text-align-start{
+    text-align: start;
+}
+.margin-bottom{
+    margin-bottom: 50px;
+}
+td{
+    margin: 5px;
+}
+.icon{
+    width: 60px;
+    height: 60px;
+}
+.header{
+    color: white;
+    padding: 10px;
+}
+.background{
+    background-color: rgb(0 216 255 / 12%);
+}
+.table{
+    min-width: 100%;
+    margin: 0 auto;
+    background-color: rgb(0 216 255 / 12%);;
+}
+h2{
+    color: white;
+}
+.bg_green{
+    background-color: rgb(83, 156, 83);
+}
+.player_cover{
+    width: 100px;
+    height: 100px;
+}
+.ui-widget-header {
+    background: lightgreen;
+    color: blue;
+    font-size: 20px;
+}
+#dialog {
+    text-align: center;
+}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Upload Music</title>
+    {# the CSS file lives at "public/css/styles.css" #}
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet"/>
+</head>
+
+<body class="bg_primary">
+<div class="container flex align-center height-full">
+    <div class="box background">
+        <div class="margin-bottom text-align-start"><h1>Upload Music</h1></div>
+        {{ form_start(add_music_form,{'enctype': 'multipart/form-data','method':'post'}) }}
+        {{ form_end(add_music_form,{'enctype': 'multipart/form-data','method':'post'}) }}
+    </div>
+</div>
+</body>
+
+</html>

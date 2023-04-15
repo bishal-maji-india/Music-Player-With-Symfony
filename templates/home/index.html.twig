@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Music Player</title>
+    {# the CSS file lives at "public/css/styles.css" #}
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet"/>
+</head>
+<body class="bg_primary">
+<div class="container flex align-center height-full">
+    <div class="box">
+        <h1>Welcome! <br> To Music Player Site</h1>
+        <p>Here you can listen download<br> and upload music, register now and enjoy <br> ad free music.</p>
+        <br>
+        <div class="margin-top">
+            <a class="button" href="{{ path('login_page_route') }}">Login</a>
+            <a class="button" href="{{ path('register_page_route') }}">Register</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
